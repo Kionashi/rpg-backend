@@ -1,0 +1,5 @@
+[client]
+database = sandbox
+user = admin
+password = development
+default-character-set = utf8
