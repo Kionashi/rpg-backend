@@ -161,14 +161,4 @@ SIMPLE_JWT = {
     # ... other settings
 }
 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': ['profile', 'email'],
-        'AUTH_PARAMS': {'access_type': 'online'},
-        'METHOD': 'oauth2',
-        'VERIFIED_EMAIL': False,
-        'LOGIN_URI': '/accounts/google/login',
-        'CLIENT_ID': '71017879283-4mr0e4ogpcqn8elbqo1tcdrt5c9n5129.apps.googleusercontent.com',
-        'SECRET': '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',
-    }
-}
+
