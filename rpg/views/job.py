@@ -12,14 +12,9 @@ class JobViewSet(ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         # Retrieve query parameters from request
-        title = self.request.query_params.get('title')
-        filtersEquals = self.request.query_params.get('filtersEquals')
-
-        queryset= queryset.filter(races__id=5)
+        race = self.request.query_params.get('race')
         # Apply filters to queryset based on query parameters
-        if title:
-            queryset = queryset.filter(title=title)
-        if filtersEquals:
-            print('EQUALS =>', filtersEquals)
+        if race:
+           queryset = queryset.filter(jobrace__race_id=5).prefetch_related('jobrace_set').values('id', 'created_at', 'updated_at', 'title', 'jobrace')
 
         return queryset
