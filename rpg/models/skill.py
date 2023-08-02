@@ -13,7 +13,7 @@ class Skill(BaseModel):
         DEBUFF = 'debuff'
     
     name = models.CharField(max_length=100)
-    side_effect_skill = models.ForeignKey("Skill", on_delete=models.SET_NULL, null=True)
+    side_effect_skill = models.ForeignKey("Skill", on_delete=models.SET_NULL, blank=True, null=True)
     level_required = models.PositiveSmallIntegerField(default=1)
     damage = models.IntegerField(default=1)
     cost = models.IntegerField(default=1)
@@ -25,4 +25,4 @@ class Skill(BaseModel):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.name} - {self.get_type_display()} - Level: {self.level_required}"
+        return f"{self.name}"

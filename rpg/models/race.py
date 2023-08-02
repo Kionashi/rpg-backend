@@ -15,8 +15,6 @@ class Race(BaseModel):
     base_dex = models.PositiveSmallIntegerField(default=1)
     image = models.ImageField(default=None)
     description= models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.name} - HP Growth: {self.hp_growth} - MP Growth: {self.mp_growth} - STR Growth: {self.str_growth} - INT Growth: {self.int_growth} - DEX Growth: {self.dex_growth}"

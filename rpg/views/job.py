@@ -1,10 +1,13 @@
 from ..models.job import Job
 from ..serializers.job import JobSerializer
 from rest_framework.viewsets import ModelViewSet
+from .base import BaseModelViewSet
 from rest_framework.permissions import IsAuthenticated
-
+from ..models.jobRace import JobRace
+from django.db import models
+from rest_framework.response import Response
 # Create your views here.
-class JobViewSet(ModelViewSet):
+class JobViewSet(BaseModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Job.objects.all()
     serializer_class = JobSerializer
@@ -12,14 +15,12 @@ class JobViewSet(ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         # Retrieve query parameters from request
-        title = self.request.query_params.get('title')
-        filtersEquals = self.request.query_params.get('filtersEquals')
-
-        queryset= queryset.filter(races__id=5)
+        race = self.request.query_params.get('race')
         # Apply filters to queryset based on query parameters
-        if title:
-            queryset = queryset.filter(title=title)
-        if filtersEquals:
-            print('EQUALS =>', filtersEquals)
-
+        if race:
+           queryset = queryset.filter(job_race__race_id=race).prefetch_related(
+                models.Prefetch('job_race', queryset=JobRace.objects.filter(race_id=race))
+            )
         return queryset
+    
+    
